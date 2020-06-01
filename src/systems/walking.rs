@@ -5,7 +5,7 @@ use amethyst::{
     input::{InputHandler, StringBindings},
 };
 
-use crate::strain::{Dude, WINDOW_HEIGHT, WINDOW_WIDTH};
+use crate::strain::{Dude, DUDE_HEIGHT_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH};
 
 #[derive(SystemDesc)]
 pub struct WalkingSystem;
@@ -19,16 +19,32 @@ impl<'s> System<'s> for WalkingSystem {
 
     fn run(&mut self, (input, dudes, mut transforms): Self::SystemData) {
         for (_dude, transform) in (&dudes, &mut transforms).join() {
-            if let Some(movement) = input.axis_value("dude_horizontal") {
-                if movement != 0.0 {
-                    let scaled_amount = 4.0 * movement as f32;
+            // Horizontal movement
+            if let Some(x_movement) = input.axis_value("dude_horizontal") {
+                if x_movement != 0.0 {
+                    let scaled_amount = 4.0 * x_movement as f32;
 
                     let clamped_x = transform.translation().x;
 
                     transform.set_translation_x(
                         (clamped_x + scaled_amount)
-                            .min(WINDOW_WIDTH - 16.0)
-                            .max(16.0),
+                            .min(WINDOW_WIDTH - DUDE_HEIGHT_WIDTH)
+                            .max(DUDE_HEIGHT_WIDTH),
+                    );
+                }
+            }
+
+            // Vertical movement
+            if let Some(y_movement) = input.axis_value("dude_vertical") {
+                if y_movement != 0.0 {
+                    let scaled_amount = 4.0 * y_movement as f32;
+
+                    let clamped_y = transform.translation().y;
+
+                    transform.set_translation_y(
+                        (clamped_y + scaled_amount)
+                            .min(WINDOW_HEIGHT - DUDE_HEIGHT_WIDTH)
+                            .max(DUDE_HEIGHT_WIDTH),
                     );
                 }
             }

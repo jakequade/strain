@@ -7,6 +7,7 @@ use amethyst::{
 
 use crate::asset_loader::{load_sprite_sheet, SpriteSheetHandle};
 
+pub const DUDE_HEIGHT_WIDTH: f32 = 32.0;
 pub const WINDOW_HEIGHT: f32 = 500.0;
 pub const WINDOW_WIDTH: f32 = 1000.0;
 
@@ -44,10 +45,6 @@ impl SimpleState for Strain {
         init_camera(world);
         init_dude(world, self.sprite_sheet.clone().unwrap());
     }
-
-    // fn update(&mut self, data: StateData<'_, GameData<'_, '_>>) {
-
-    // }
 }
 
 //#endregion
