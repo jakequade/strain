@@ -1,0 +1,6 @@
+(
+    actions: {},
+    axes: {
+        "dude_horizontal": Emulated(pos: Key(E), neg: Key(A)),
+    }
+)

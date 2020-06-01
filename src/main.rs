@@ -1,8 +1,10 @@
 mod asset_loader;
 mod strain;
+mod systems;
 
 use amethyst::{
     core::transform::TransformBundle,
+    input::{InputBundle, StringBindings},
     prelude::*,
     renderer::{
         plugins::{RenderFlat2D, RenderToWindow},
@@ -12,7 +14,10 @@ use amethyst::{
     utils::application_root_dir,
 };
 
-use crate::strain::Strain;
+use crate::{
+    strain::Strain,
+    systems::WalkingSystem
+};
 
 fn main() -> amethyst::Result<()> {
     amethyst::start_logger(Default::default());
@@ -22,6 +27,9 @@ fn main() -> amethyst::Result<()> {
     let assets_dir = app_root.join("assets");
     let config_dir = app_root.join("config");
     let display_config_path = config_dir.join("display.ron");
+    let input_config_path = config_dir.join("bindings.ron");
+
+    let input_bundle = InputBundle::<StringBindings>::new().with_bindings_from_file(input_config_path)?;
 
     let game_data = GameDataBuilder::default()
         .with_bundle(
@@ -32,7 +40,9 @@ fn main() -> amethyst::Result<()> {
                 )
                 .with_plugin(RenderFlat2D::default()),
         )?
-        .with_bundle(TransformBundle::new())?;
+        .with_bundle(input_bundle)?
+        .with_bundle(TransformBundle::new())?
+        .with(WalkingSystem, "walking_system", &[]);
 
     let mut game = Application::new(assets_dir, Strain::default(), game_data)?;
     game.run();

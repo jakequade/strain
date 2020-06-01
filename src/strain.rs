@@ -7,14 +7,14 @@ use amethyst::{
 
 use crate::asset_loader::{load_sprite_sheet, SpriteSheetHandle};
 
-const WINDOW_HEIGHT: f32 = 500.0;
-const WINDOW_WIDTH: f32 = 1000.0;
+pub const WINDOW_HEIGHT: f32 = 500.0;
+pub const WINDOW_WIDTH: f32 = 1000.0;
 
 //#region Camera
 
 fn init_camera(world: &mut World) {
     let mut transform = Transform::default();
-    transform.set_translation_xyz(WINDOW_WIDTH, WINDOW_HEIGHT, 1.0);
+    transform.set_translation_xyz(WINDOW_WIDTH * 0.5, WINDOW_HEIGHT * 0.5, 1.0);
 
     world
         .create_entity()
@@ -31,6 +31,7 @@ fn init_camera(world: &mut World) {
 /// - `sprite_sheet` needs to be an `Option` so that `Strain::default()` can be invoked.
 #[derive(Default)]
 pub struct Strain {
+    dude: Option<Dude>,
     sprite_sheet: Option<SpriteSheetHandle>,
 }
 
@@ -39,14 +40,21 @@ impl SimpleState for Strain {
         let world = data.world;
 
         self.sprite_sheet.replace(load_sprite_sheet(world));
+
         init_camera(world);
-        init_floor(world, self.sprite_sheet.clone().unwrap());
+        init_dude(world, self.sprite_sheet.clone().unwrap());
     }
+
+    // fn update(&mut self, data: StateData<'_, GameData<'_, '_>>) {
+
+    // }
 }
 
 //#endregion
 
 //#region floor
+
+// TODO: Finish this region once we have a moveable character
 
 pub struct Floor {}
 
@@ -67,7 +75,7 @@ pub fn init_floor(world: &mut World, sprite_sheet: SpriteSheetHandle) {
     };
 
     let mut floor_transform = Transform::default();
-    floor_transform.set_translation_xyz(WINDOW_WIDTH, 12.00, 0.0);
+    floor_transform.set_translation_xyz(0.0, 0.0, 0.0);
 
     world
         .create_entity()
@@ -78,3 +86,34 @@ pub fn init_floor(world: &mut World, sprite_sheet: SpriteSheetHandle) {
 }
 
 //#endregion
+
+//#region Dude
+
+pub struct Dude {}
+
+impl Dude {
+    pub fn new() -> Dude {
+        Dude {}
+    }
+}
+
+impl Component for Dude {
+    type Storage = DenseVecStorage<Self>;
+}
+
+pub fn init_dude(world: &mut World, sprite_sheet: SpriteSheetHandle) {
+    let mut transform = Transform::default();
+    transform.set_translation_xyz(32.0, 32.00, 0.0);
+
+    let sprite_renderer = SpriteRender {
+        sprite_sheet,
+        sprite_number: 0,
+    };
+
+    world
+        .create_entity()
+        .with(Dude::new())
+        .with(sprite_renderer)
+        .with(transform)
+        .build();
+}
