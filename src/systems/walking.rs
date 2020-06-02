@@ -5,7 +5,10 @@ use amethyst::{
     input::{InputHandler, StringBindings},
 };
 
-use crate::strain::{Dude, DUDE_HEIGHT_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH};
+use crate::{
+    components::Dude,
+    strain::{DUDE_HEIGHT_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH},
+};
 
 #[derive(SystemDesc)]
 pub struct WalkingSystem;

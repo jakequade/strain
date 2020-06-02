@@ -1,7 +1,9 @@
 (
-    actions: {},
+    actions: {
+        "jump": [ [Key(W)] ],
+    },
     axes: {
         "dude_horizontal": Emulated(pos: Key(E), neg: Key(A)),
-        "dude_vertical": Emulated(pos: Key(W), neg: Key(S)),
-    }
+        "dude_vertical": Emulated(pos: Key(H), neg: Key(T)),
+    },
 )

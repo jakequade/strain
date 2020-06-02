@@ -5,7 +5,10 @@ use amethyst::{
     renderer::{Camera, SpriteRender},
 };
 
-use crate::asset_loader::{load_sprite_sheet, SpriteSheetHandle};
+use crate::{
+    asset_loader::{load_sprite_sheet, SpriteSheetHandle},
+    components::{Dude, init_dude},
+};
 
 pub const DUDE_HEIGHT_WIDTH: f32 = 32.0;
 pub const WINDOW_HEIGHT: f32 = 500.0;
@@ -32,7 +35,6 @@ fn init_camera(world: &mut World) {
 /// - `sprite_sheet` needs to be an `Option` so that `Strain::default()` can be invoked.
 #[derive(Default)]
 pub struct Strain {
-    dude: Option<Dude>,
     sprite_sheet: Option<SpriteSheetHandle>,
 }
 
@@ -83,34 +85,3 @@ pub fn init_floor(world: &mut World, sprite_sheet: SpriteSheetHandle) {
 }
 
 //#endregion
-
-//#region Dude
-
-pub struct Dude {}
-
-impl Dude {
-    pub fn new() -> Dude {
-        Dude {}
-    }
-}
-
-impl Component for Dude {
-    type Storage = DenseVecStorage<Self>;
-}
-
-pub fn init_dude(world: &mut World, sprite_sheet: SpriteSheetHandle) {
-    let mut transform = Transform::default();
-    transform.set_translation_xyz(32.0, 32.00, 0.0);
-
-    let sprite_renderer = SpriteRender {
-        sprite_sheet,
-        sprite_number: 0,
-    };
-
-    world
-        .create_entity()
-        .with(Dude::new())
-        .with(sprite_renderer)
-        .with(transform)
-        .build();
-}

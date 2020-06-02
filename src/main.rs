@@ -1,4 +1,5 @@
 mod asset_loader;
+mod components;
 mod strain;
 mod systems;
 
@@ -16,7 +17,7 @@ use amethyst::{
 
 use crate::{
     strain::Strain,
-    systems::WalkingSystem
+    systems::{PhysicsSystem, WalkingSystem}
 };
 
 fn main() -> amethyst::Result<()> {
@@ -42,7 +43,8 @@ fn main() -> amethyst::Result<()> {
         )?
         .with_bundle(input_bundle)?
         .with_bundle(TransformBundle::new())?
-        .with(WalkingSystem, "walking_system", &[]);
+        .with(WalkingSystem, "walking_system", &[])
+        .with(PhysicsSystem, "physics_system", &["walking_system"]);
 
     let mut game = Application::new(assets_dir, Strain::default(), game_data)?;
     game.run();
