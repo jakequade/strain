@@ -2,16 +2,24 @@ use amethyst::{
     core::transform::Transform,
     ecs::{prelude::Component, storage::DenseVecStorage},
     prelude::*,
-    renderer::{SpriteRender},
+    renderer::SpriteRender,
 };
 
 use crate::asset_loader::SpriteSheetHandle;
 
-pub struct Dude {}
+pub enum DudeState {
+    Idle,
+}
+
+pub struct Dude {
+    pub state: DudeState,
+}
 
 impl Dude {
     pub fn new() -> Dude {
-        Dude {}
+        Dude {
+            state: DudeState::Idle,
+        }
     }
 }
 

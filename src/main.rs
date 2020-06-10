@@ -17,7 +17,10 @@ use amethyst::{
 
 use crate::{
     strain::Strain,
-    systems::{PhysicsSystem, WalkingSystem}
+    systems::{
+        AnimationControlSystem, DudeAnimationSystem, PhysicsSystem, TransformationSystem,
+        WalkingSystem,
+    },
 };
 
 fn main() -> amethyst::Result<()> {
@@ -30,7 +33,8 @@ fn main() -> amethyst::Result<()> {
     let display_config_path = config_dir.join("display.ron");
     let input_config_path = config_dir.join("bindings.ron");
 
-    let input_bundle = InputBundle::<StringBindings>::new().with_bindings_from_file(input_config_path)?;
+    let input_bundle =
+        InputBundle::<StringBindings>::new().with_bindings_from_file(input_config_path)?;
 
     let game_data = GameDataBuilder::default()
         .with_bundle(
@@ -44,7 +48,18 @@ fn main() -> amethyst::Result<()> {
         .with_bundle(input_bundle)?
         .with_bundle(TransformBundle::new())?
         .with(WalkingSystem, "walking_system", &[])
-        .with(PhysicsSystem, "physics_system", &["walking_system"]);
+        .with(PhysicsSystem, "physics_system", &["walking_system"])
+        .with(TransformationSystem, "transformation_system", &[])
+        .with(
+            DudeAnimationSystem,
+            "dude_animation_system",
+            &["transformation_system"],
+        )
+        .with(
+            AnimationControlSystem,
+            "animation_control_system",
+            &["dude_animation_system"],
+        );
 
     let mut game = Application::new(assets_dir, Strain::default(), game_data)?;
     game.run();
