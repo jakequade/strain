@@ -83,6 +83,8 @@ impl<'s> System<'s> for DudeAnimationSystem {
         DudeState::Idle => AnimationId::DudeIdle,
       };
 
+      println!("{:?}", new_animation_id);
+
       // If new animation differs from current, abort current
       // and start new
 
