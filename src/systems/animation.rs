@@ -6,7 +6,7 @@ use amethyst::{
 
 use crate::components::{
   animation::{Animation, AnimationId},
-  dude::{Dude, DudeState},
+  Dude, DudeState,
 };
 
 //#region AnimationControlSystem

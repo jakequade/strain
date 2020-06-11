@@ -4,7 +4,7 @@ use amethyst::{
     ecs::{Join, Read, ReadStorage, System, SystemData, WriteStorage},
 };
 
-use crate::components::{dude::Dude, velocity::Velocity};
+use crate::components::{Dude, velocity::Velocity};
 
 #[derive(SystemDesc)]
 pub struct PhysicsSystem;

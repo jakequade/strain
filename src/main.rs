@@ -1,5 +1,8 @@
 mod asset_loader;
 mod components;
+mod entities;
+mod resources;
+mod states;
 mod strain;
 mod systems;
 

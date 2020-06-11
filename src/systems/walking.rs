@@ -6,7 +6,7 @@ use amethyst::{
 };
 
 use crate::{
-    components::dude::Dude,
+    components::Dude,
     strain::{DUDE_HEIGHT_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH},
 };
 

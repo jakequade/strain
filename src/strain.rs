@@ -6,8 +6,9 @@ use amethyst::{
 };
 
 use crate::{
+    states::LoadState,
     asset_loader::{load_sprite_sheet, SpriteSheetHandle},
-    components::dude::{init_dude, Dude},
+    components::{init_dude, Dude},
 };
 
 pub const DUDE_HEIGHT_WIDTH: f32 = 32.0;
