@@ -12,7 +12,7 @@ pub fn load_camera(world: &mut World) {
     };
 
     let mut transform = Transform::default();
-    transform.set_translation_xyz(0.0, 0.0, 1.0);
+    transform.set_translation_xyz(500.0, 500.0, 1.0);
 
     world
       .create_entity()

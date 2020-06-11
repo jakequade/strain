@@ -61,7 +61,9 @@ pub fn load_assets(world: &mut World, asset_type_list: Vec<AssetType>) -> Progre
 
     for &asset_type in asset_type_list.iter() {
         let (texture_path, ron_path) = match asset_type {
-            AssetType::Dude => ("", "prefabs/dude.ron")
+            AssetType::Dude => {
+                ("", "assets/prefabs/dude.ron")
+            }
         };
 
         match asset_type {

@@ -25,14 +25,13 @@ impl SimpleState for LoadState {
 
         self.progress_counter = Some(load_assets(world, vec![AssetType::Dude]));
 
-        let mut progress = ProgressCounter::default();
-
         load_camera(world);
     }
 
     fn update(&mut self, data: &mut StateData<'_, GameData<'_, '_>>) -> SimpleTrans {
         if let Some(ref progress_counter) = self.progress_counter {
             if progress_counter.is_complete() {
+                println!("Got inside");
 
                 let dude_prefab_handle = {
                     let prefab_list = data.world.read_resource::<PrefabList>();

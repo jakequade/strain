@@ -24,6 +24,7 @@ use crate::{
         AnimationControlSystem, DudeAnimationSystem, PhysicsSystem, TransformationSystem,
         WalkingSystem,
     },
+    states::LoadState
 };
 
 fn main() -> amethyst::Result<()> {
@@ -64,7 +65,7 @@ fn main() -> amethyst::Result<()> {
             &["dude_animation_system"],
         );
 
-    let mut game = Application::new(assets_dir, Strain::default(), game_data)?;
+    let mut game = Application::new(assets_dir, LoadState::default(), game_data)?;
     game.run();
 
     Ok(())

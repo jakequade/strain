@@ -14,6 +14,7 @@ use crate::components::{
 };
 
 pub fn load_dude(world: &mut World, prefab: Handle<Prefab<AnimationPrefabData>>) {
+    println!("loading dude");
     let mut transform = Transform::default();
 
     transform.set_translation_x(384.);
