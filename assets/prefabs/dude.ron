@@ -7,7 +7,7 @@ Prefab(
         // SpriteSheetPrefab
         sprite_scene: (
           sheet: Sheet(
-            texture: File("texture/dude.png", (
+            texture: File("texture/spritesheet.png", (
               "IMAGE", (
                 sampler_info: (
                   min_filter: Nearest,
@@ -28,23 +28,36 @@ Prefab(
             )),
             sprites: [
               List((
-                texture_width: 384,
-                texture_height: 32,
+                texture_width: 396,
+                texture_height: 165,
                 sprites: [
+
                   // Idle, 384 / 32 === 12
-                  (x: 0, y:0, width: 32, height: 32),
-                  (x: 33, y:0, width: 32, height: 32),
-                  (x: 65, y:0, width: 32, height: 32),
-                  (x: 97, y:0, width: 32, height: 32),
-                  (x: 129, y:0, width: 32, height: 32),
-                  (x: 161, y:0, width: 32, height: 32),
-                  (x: 193, y:0, width: 32, height: 32),
-                  (x: 225, y:0, width: 32, height: 32),
-                  (x: 257, y:0, width: 32, height: 32),
-                  (x: 289, y:0, width: 32, height: 32),
-                  (x: 321, y:0, width: 32, height: 32),
-                  (x: 353, y:0, width: 32, height: 32),
-                  (x: 385, y:0, width: 32, height: 32),
+                  (x: 1, y: 65, width: 32, height: 32),
+                  (x: 33, y: 65, width: 32, height: 32),
+                  (x: 65, y: 65, width: 32, height: 32),
+                  (x: 97, y: 65, width: 32, height: 32),
+                  (x: 129, y: 65, width: 32, height: 32),
+                  (x: 161, y: 65, width: 32, height: 32),
+                  (x: 193, y: 65, width: 32, height: 32),
+                  (x: 225, y: 65, width: 32, height: 32),
+                  (x: 257, y: 65, width: 32, height: 32),
+                  (x: 289, y: 65, width: 32, height: 32),
+                  (x: 322, y: 65, width: 32, height: 32),
+
+                  // Walking
+                  (x: 1, y: 97, width: 32, height: 32),
+                  (x: 33, y: 97, width: 32, height: 32),
+                  (x: 66, y: 97, width: 32, height: 32),
+                  (x: 99, y: 97, width: 32, height: 32),
+                  (x: 129, y: 97, width: 32, height: 32),
+                  (x: 161, y: 97, width: 32, height: 32),
+                  (x: 193, y: 97, width: 32, height: 32),
+                  (x: 225, y: 97, width: 32, height: 32),
+                  (x: 257, y: 97, width: 32, height: 32),
+                  (x: 289, y: 97, width: 32, height: 32),
+                  (x: 322, y: 97, width: 32, height: 32),
+                  (x: 322, y: 97, width: 32, height: 32),
                 ],
               )),
             ],
@@ -67,18 +80,17 @@ Prefab(
                     (
                       input: [
                         0.0,
+                        0.1,
                         0.2,
+                        0.3,
                         0.4,
+                        0.5,
                         0.6,
+                        0.7,
                         0.8,
+                        0.9,
                         1.0,
-                        1.2,
-                        1.4,
-                        1.6,
-                        1.8,
-                        2.0,
-                        2.2,
-                        2.4,
+                        1.1,
                       ],
                       output: [
                         0,

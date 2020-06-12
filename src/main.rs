@@ -27,6 +27,7 @@ use crate::{
     systems::{
         AnimationControlSystem, CameraTransformationSystem, DudeAnimationSystem, PhysicsSystem,
         TransformationSystem, WalkingSystem,
+        input::DudeInputSystem
     },
 };
 
@@ -66,8 +67,6 @@ fn main() -> amethyst::Result<()> {
             TransformBundle::new()
                 .with_dep(&["sprite_animation_control", "sprite_sampler_interpolation"]),
         )?
-        // .with(WalkingSystem, "walking_system", &[])
-        // .with(PhysicsSystem, "physics_system", &["walking_system"])
         .with(TransformationSystem, "transformation_system", &[])
         .with(
             CameraTransformationSystem,
@@ -83,6 +82,11 @@ fn main() -> amethyst::Result<()> {
             AnimationControlSystem,
             "animation_control_system",
             &["dude_animation_system"],
+        )
+        .with(
+            DudeInputSystem,
+            "dude_input_system",
+            &[]
         );
 
     let mut game = Application::new(assets_dir, LoadState::default(), game_data)?;

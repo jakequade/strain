@@ -6,6 +6,7 @@ pub use self::{
 };
 
 mod animation;
+pub mod input;
 mod physics;
 mod transformation;
 mod walking;

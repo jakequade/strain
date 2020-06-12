@@ -29,13 +29,13 @@ impl<'s> System<'s> for CameraTransformationSystem {
     ReadExpect<'s, Context>,
   );
 
-  fn run (&mut self, (dudes, subjects, transforms, contexts): Self::SystemData) {
+  fn run (&mut self, (dudes, subjects, mut transforms, contexts): Self::SystemData) {
     let mut dude_x = 0.;
 
     let map_width = 700.;
     let background_width = 700.;
 
-    for (_dude, transform) in (&dudes, &transforms).join() {
+    for (_dude, transform) in (&dudes, &mut transforms).join() {
       dude_x = transform.translation().x;
 
       // for (_subject, transform) in (&subjects, &mut transforms).join() {

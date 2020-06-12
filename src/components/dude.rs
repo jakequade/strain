@@ -9,6 +9,7 @@ use crate::asset_loader::SpriteSheetHandle;
 
 pub enum DudeState {
     Idle,
+    Walking,
 }
 
 pub struct Dude {

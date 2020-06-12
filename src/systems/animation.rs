@@ -76,6 +76,7 @@ impl<'s> System<'s> for DudeAnimationSystem {
     {
       let new_animation_id = match dude.state {
         DudeState::Idle => AnimationId::DudeIdle,
+        _ => AnimationId::DudeIdle
       };
 
       // If new animation differs from current, abort current
