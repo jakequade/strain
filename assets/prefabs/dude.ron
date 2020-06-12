@@ -6,7 +6,7 @@ Prefab(
         // SpriteSheetPrefab
         sprite_scene: (
           sheet: Sheet(
-            texture: File("texture/runx32.png", (
+            texture: File("texture/silly.png", (
               "IMAGE", (
                 sampler_info: (
                   min_filter: Nearest,

@@ -1,7 +1,7 @@
 pub use self::{
   animation::{AnimationControlSystem, DudeAnimationSystem},
   physics::PhysicsSystem,
-  transformation::TransformationSystem,
+  transformation::{CameraTransformationSystem, TransformationSystem},
   walking::WalkingSystem,
 };
 

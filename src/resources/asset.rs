@@ -60,15 +60,16 @@ pub fn load_assets(world: &mut World, asset_type_list: Vec<AssetType>) -> Progre
     let mut progress_counter = ProgressCounter::new();
 
     for &asset_type in asset_type_list.iter() {
-        let (texture_path, ron_path) = match asset_type {
+        let (_, ron_path) = match asset_type {
             AssetType::Dude => {
-                ("", "assets/prefabs/dude.ron")
+                ("", "prefabs/dude.ron")
             }
         };
 
         match asset_type {
             AssetType::Dude => {
                 let prefab_handle = get_animation_prefab_handle(world, ron_path, &mut progress_counter);
+                println!("prefab_handle progress: {:?}", prefab_handle);
                 prefab_list.insert(asset_type, prefab_handle);
             }
         };

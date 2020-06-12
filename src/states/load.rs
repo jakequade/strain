@@ -13,7 +13,7 @@ pub struct LoadState {
 }
 
 use crate::{
-    entities::{load_camera, load_dude},
+    entities::{load_camera, load_camera_subject, load_dude},
     resources::{AssetType, Context},
 };
 
@@ -25,13 +25,13 @@ impl SimpleState for LoadState {
 
         self.progress_counter = Some(load_assets(world, vec![AssetType::Dude]));
 
-        load_camera(world);
+        let camera_subject = load_camera_subject(world);
+        load_camera(world, camera_subject);
     }
 
     fn update(&mut self, data: &mut StateData<'_, GameData<'_, '_>>) -> SimpleTrans {
         if let Some(ref progress_counter) = self.progress_counter {
             if progress_counter.is_complete() {
-                println!("Got inside");
 
                 let dude_prefab_handle = {
                     let prefab_list = data.world.read_resource::<PrefabList>();

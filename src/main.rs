@@ -7,11 +7,13 @@ mod strain;
 mod systems;
 
 use amethyst::{
+    animation::AnimationBundle,
     core::transform::TransformBundle,
     input::{InputBundle, StringBindings},
     prelude::*,
     renderer::{
         plugins::{RenderFlat2D, RenderToWindow},
+        sprite::SpriteRender,
         types::DefaultBackend,
         RenderingBundle,
     },
@@ -19,9 +21,10 @@ use amethyst::{
 };
 
 use crate::{
+    components::animation::{AnimationId, AnimationPrefabData},
     strain::Strain,
     systems::{
-        AnimationControlSystem, DudeAnimationSystem, PhysicsSystem, TransformationSystem,
+        AnimationControlSystem, CameraTransformationSystem, DudeAnimationSystem, PhysicsSystem, TransformationSystem,
         WalkingSystem,
     },
     states::LoadState
@@ -49,11 +52,16 @@ fn main() -> amethyst::Result<()> {
                 )
                 .with_plugin(RenderFlat2D::default()),
         )?
+        .with_bundle(AnimationBundle::<AnimationId, SpriteRender>::new(
+            "sprite_animation_control",
+            "sprite_sampler_interpolation",
+        ))?
         .with_bundle(input_bundle)?
         .with_bundle(TransformBundle::new())?
-        .with(WalkingSystem, "walking_system", &[])
-        .with(PhysicsSystem, "physics_system", &["walking_system"])
+        // .with(WalkingSystem, "walking_system", &[])
+        // .with(PhysicsSystem, "physics_system", &["walking_system"])
         .with(TransformationSystem, "transformation_system", &[])
+        .with(CameraTransformationSystem, "camera_transformation_system", &["transformation_system"])
         .with(
             DudeAnimationSystem,
             "dude_animation_system",
