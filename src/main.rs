@@ -8,26 +8,26 @@ mod systems;
 
 use amethyst::{
     animation::AnimationBundle,
+    assets::PrefabLoaderSystemDesc,
     core::transform::TransformBundle,
     input::{InputBundle, StringBindings},
     prelude::*,
     renderer::{
         plugins::{RenderFlat2D, RenderToWindow},
-        sprite::SpriteRender,
         types::DefaultBackend,
-        RenderingBundle,
+        RenderingBundle, SpriteRender,
     },
     utils::application_root_dir,
 };
 
 use crate::{
     components::animation::{AnimationId, AnimationPrefabData},
+    states::LoadState,
     strain::Strain,
     systems::{
-        AnimationControlSystem, CameraTransformationSystem, DudeAnimationSystem, PhysicsSystem, TransformationSystem,
-        WalkingSystem,
+        AnimationControlSystem, CameraTransformationSystem, DudeAnimationSystem, PhysicsSystem,
+        TransformationSystem, WalkingSystem,
     },
-    states::LoadState
 };
 
 fn main() -> amethyst::Result<()> {
@@ -44,6 +44,11 @@ fn main() -> amethyst::Result<()> {
         InputBundle::<StringBindings>::new().with_bindings_from_file(input_config_path)?;
 
     let game_data = GameDataBuilder::default()
+        .with_system_desc(
+            PrefabLoaderSystemDesc::<AnimationPrefabData>::default(),
+            "scene_loader",
+            &[],
+        )
         .with_bundle(
             RenderingBundle::<DefaultBackend>::new()
                 .with_plugin(
@@ -57,11 +62,18 @@ fn main() -> amethyst::Result<()> {
             "sprite_sampler_interpolation",
         ))?
         .with_bundle(input_bundle)?
-        .with_bundle(TransformBundle::new())?
+        .with_bundle(
+            TransformBundle::new()
+                .with_dep(&["sprite_animation_control", "sprite_sampler_interpolation"]),
+        )?
         // .with(WalkingSystem, "walking_system", &[])
         // .with(PhysicsSystem, "physics_system", &["walking_system"])
         .with(TransformationSystem, "transformation_system", &[])
-        .with(CameraTransformationSystem, "camera_transformation_system", &["transformation_system"])
+        .with(
+            CameraTransformationSystem,
+            "camera_transformation_system",
+            &["transformation_system"],
+        )
         .with(
             DudeAnimationSystem,
             "dude_animation_system",

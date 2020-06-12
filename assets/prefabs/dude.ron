@@ -1,3 +1,4 @@
+#![enable(implicit_some)]
 Prefab(
   entities: [
     // Dude
@@ -6,7 +7,7 @@ Prefab(
         // SpriteSheetPrefab
         sprite_scene: (
           sheet: Sheet(
-            texture: File("texture/silly.png", (
+            texture: File("texture/dude.png", (
               "IMAGE", (
                 sampler_info: (
                   min_filter: Nearest,
@@ -16,7 +17,7 @@ Prefab(
                   lod_bias: (0),
                   lod_range: (
                     start: ( 0 ),
-                    end: ( 8000 ),
+                    end: ( 80 ),
                   ),
                   comparison: None,
                   border: (0),
@@ -57,7 +58,7 @@ Prefab(
         animation_set: (
           animations: [
             (
-              Idle,
+              DudeIdle,
               (
                 samplers: [
                   (

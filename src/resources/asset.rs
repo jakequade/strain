@@ -25,7 +25,7 @@ pub struct PrefabList {
 
 impl PrefabList {
     pub fn insert(&mut self, asset_type: AssetType, prefab_handle: Handle<Prefab<AnimationPrefabData>>) {
-
+        self.prefabs.insert(asset_type, prefab_handle);
     }
 
     pub fn get(&self, asset_type: AssetType) -> Option<&Handle<Prefab<AnimationPrefabData>>> {
@@ -37,25 +37,9 @@ impl PrefabList {
 
 //#region SpriteSheetList
 
-#[derive(Default)]
-pub struct SpriteSheetList {
-    sprite_sheets: HashMap<AssetType, SpriteSheetHandle>,
-}
-
-impl SpriteSheetList {
-    pub fn insert(&mut self, asset_type: AssetType, sprite_sheet_handle: SpriteSheetHandle) {
-        self.sprite_sheets.insert(asset_type, sprite_sheet_handle);
-    }
-
-    pub fn get(&self, asset_type: AssetType) -> Option<&SpriteSheetHandle> {
-        self.sprite_sheets.get(&asset_type)
-    }
-}
-
 //#endregion
 
 pub fn load_assets(world: &mut World, asset_type_list: Vec<AssetType>) -> ProgressCounter {
-    let mut sprite_sheet_list = SpriteSheetList::default();
     let mut prefab_list = PrefabList::default();
     let mut progress_counter = ProgressCounter::new();
 
@@ -69,13 +53,11 @@ pub fn load_assets(world: &mut World, asset_type_list: Vec<AssetType>) -> Progre
         match asset_type {
             AssetType::Dude => {
                 let prefab_handle = get_animation_prefab_handle(world, ron_path, &mut progress_counter);
-                println!("prefab_handle progress: {:?}", prefab_handle);
                 prefab_list.insert(asset_type, prefab_handle);
             }
         };
     }
 
-    world.insert(sprite_sheet_list);
     world.insert(prefab_list);
     progress_counter
 }

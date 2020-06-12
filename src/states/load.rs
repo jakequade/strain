@@ -1,11 +1,9 @@
 use amethyst::{
-    assets::{Handle, Loader, ProgressCounter},
+    assets::{Handle, Loader, PrefabLoaderSystemDesc, ProgressCounter},
     prelude::{GameData, SimpleState, SimpleTrans, StateData, Trans, WorldExt},
 };
 
-use crate::{
-    resources::{load_assets, PrefabList},
-};
+use crate::resources::{load_assets, PrefabList};
 
 #[derive(Default)]
 pub struct LoadState {
@@ -32,7 +30,6 @@ impl SimpleState for LoadState {
     fn update(&mut self, data: &mut StateData<'_, GameData<'_, '_>>) -> SimpleTrans {
         if let Some(ref progress_counter) = self.progress_counter {
             if progress_counter.is_complete() {
-
                 let dude_prefab_handle = {
                     let prefab_list = data.world.read_resource::<PrefabList>();
                     prefab_list.get(AssetType::Dude).unwrap().clone()

@@ -34,11 +34,6 @@ impl<'s> System<'s> for AnimationControlSystem {
           // Add each animation to the AnimationControlSet if it isn't already there.
           // This ensures persistence after `abort()` calls
           if !control_set.has_animation(animation_id) {
-            println!(
-              "Added animation with id {:?} for entity {:?}",
-              animation_id, entity
-            );
-
             let end = match animation_id {
               AnimationId::DudeIdle => EndControl::Loop(None),
             };
@@ -83,17 +78,9 @@ impl<'s> System<'s> for DudeAnimationSystem {
         DudeState::Idle => AnimationId::DudeIdle,
       };
 
-      println!("{:?}", new_animation_id);
-
       // If new animation differs from current, abort current
       // and start new
-
       if new_animation_id != animation.current {
-        println!(
-          "Updating animation for entity: {:?} from {:?} to {:?}",
-          entity, animation.current, new_animation_id,
-        );
-
         control_set.abort(animation.current);
         control_set.start(new_animation_id);
 
