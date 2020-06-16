@@ -4,8 +4,8 @@ use amethyst::{
 };
 
 use crate::{
-  components::{Dude, Subject},
-  resources::Context
+  components::{dude::Dude, subject::Subject},
+  resources::Context,
 };
 
 #[derive(Default)]
@@ -29,7 +29,7 @@ impl<'s> System<'s> for CameraTransformationSystem {
     ReadExpect<'s, Context>,
   );
 
-  fn run (&mut self, (dudes, subjects, mut transforms, contexts): Self::SystemData) {
+  fn run(&mut self, (dudes, subjects, mut transforms, contexts): Self::SystemData) {
     let mut dude_x = 0.;
 
     let map_width = 700.;

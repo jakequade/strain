@@ -6,7 +6,7 @@ use amethyst::{
 
 use crate::components::{
   animation::{Animation, AnimationId},
-  Dude, DudeState,
+  dude::{Dude, DudeState},
 };
 
 //#region AnimationControlSystem
@@ -76,7 +76,7 @@ impl<'s> System<'s> for DudeAnimationSystem {
     {
       let new_animation_id = match dude.state {
         DudeState::Idle => AnimationId::DudeIdle,
-        _ => AnimationId::DudeIdle
+        _ => AnimationId::DudeIdle,
       };
 
       // If new animation differs from current, abort current

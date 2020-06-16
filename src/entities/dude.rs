@@ -1,16 +1,13 @@
 use amethyst::{
     assets::{Handle, Prefab},
+    core::{Transform, WithNamed},
     ecs::prelude::{Builder, World, WorldExt},
-    core::{
-        math::{Vector2, Vector3},
-        Transform, WithNamed,
-    },
     renderer::transparent::Transparent,
 };
 
 use crate::components::{
     animation::{Animation, AnimationId, AnimationPrefabData},
-    Dude
+    dude::Dude,
 };
 
 pub fn load_dude(world: &mut World, prefab: Handle<Prefab<AnimationPrefabData>>) {
@@ -19,15 +16,16 @@ pub fn load_dude(world: &mut World, prefab: Handle<Prefab<AnimationPrefabData>>)
     transform.set_translation_x(384.);
     transform.set_translation_y(176.);
 
-    world.create_entity()
-    .with(Dude::new())
-    .named("Dude")
-    .with(transform)
-    .with(Animation::new(
-        AnimationId::DudeIdle,
-        vec![AnimationId::DudeIdle]
-    ))
-    .with(prefab)
-    .with(Transparent)
-    .build();
+    world
+        .create_entity()
+        .with(Dude::new())
+        .named("Dude")
+        .with(transform)
+        .with(Animation::new(
+            AnimationId::DudeIdle,
+            vec![AnimationId::DudeIdle],
+        ))
+        .with(prefab)
+        .with(Transparent)
+        .build();
 }

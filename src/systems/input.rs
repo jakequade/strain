@@ -1,9 +1,9 @@
 use amethyst::{
     ecs::{Join, Read, System, WriteStorage},
-    input::{InputHandler, StringBindings}
-};  
+    input::{InputHandler, StringBindings},
+};
 
-use crate::components::{Dude, DudeState};
+use crate::components::dude::{Dude, DudeState};
 
 pub enum Direction {
     Left,
@@ -16,7 +16,7 @@ impl<'s> System<'s> for DudeInputSystem {
     type SystemData = (
         // WriteStorage<'s, Direction>,
         WriteStorage<'s, Dude>,
-        Read<'s, InputHandler<StringBindings>>
+        Read<'s, InputHandler<StringBindings>>,
     );
 
     fn run(&mut self, (mut dudes, input): Self::SystemData) {

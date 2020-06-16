@@ -23,11 +23,11 @@ use amethyst::{
 use crate::{
     components::animation::{AnimationId, AnimationPrefabData},
     states::LoadState,
-    strain::Strain,
     systems::{
-        AnimationControlSystem, CameraTransformationSystem, DudeAnimationSystem, PhysicsSystem,
-        TransformationSystem, WalkingSystem,
-        input::DudeInputSystem
+        animation::{AnimationControlSystem, DudeAnimationSystem},
+        input::DudeInputSystem,
+        physics::PhysicsSystem,
+        transformation::{CameraTransformationSystem, TransformationSystem},
     },
 };
 
@@ -83,11 +83,7 @@ fn main() -> amethyst::Result<()> {
             "animation_control_system",
             &["dude_animation_system"],
         )
-        .with(
-            DudeInputSystem,
-            "dude_input_system",
-            &[]
-        );
+        .with(DudeInputSystem, "dude_input_system", &[]);
 
     let mut game = Application::new(assets_dir, LoadState::default(), game_data)?;
     game.run();
