@@ -75,6 +75,7 @@ impl<'s> System<'s> for DudeAnimationSystem {
       (&entities, &dudes, &mut animations, &mut control_sets).join()
     {
       let new_animation_id = match dude.state {
+        DudeState::Jumping => AnimationId::DudeJumping,
         DudeState::Walking => AnimationId::DudeWalking,
         _ => AnimationId::DudeIdle,
       };

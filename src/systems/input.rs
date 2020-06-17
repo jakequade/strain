@@ -22,9 +22,13 @@ impl<'s> System<'s> for DudeInputSystem {
             .axis_value("dude_horizontal")
             .expect("Could not find dude_horizontal axis value");
 
-        
+        let is_jumping = input.action_is_down("jump").expect("Could not find 'jump' action");
 
         for (direction, dude) in (&mut directions, &mut dudes).join() {
+            if is_jumping {
+                dude.state = DudeState::Jumping;
+                return
+            }
             if run_input == 0.0 {
                 dude.state = DudeState::Idle;
                 return;

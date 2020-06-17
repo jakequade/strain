@@ -22,9 +22,14 @@ impl<'s> System<'s> for MotionSystem {
                     let acceleration_x = if motion.velocity.x != 0. { -0.6 } else { 0. };
                     Vector2::new(acceleration_x, -0.6)
                 },
+                DudeState::Jumping => {
+                    // TODO: change this to consider collisions once I've built those out
+                    let acceleration_x = if motion.velocity.x != 0. { -0.6 } else { 0. };
+                    Vector2::new(acceleration_x, -0.6)
+                },
                 DudeState::Walking => {
                     Vector2::new(0.6, -0.6)
-                }
+                },
             };
 
             motion.update_velocity(acceleration, direction, 0., dude.max_ground_speed);

@@ -59,6 +59,10 @@ Systems collectively determine both what is happening in the game right now, and
   - the `motion` system will apply an acceleration value
   - the `transformation` system will join all these events and apply the relevant translations against the `Transform` instances tied to those systems.
 
+Almost everything that happens post-loading in the game happens via systems. This is mainly because logic needs to be evaluated during the game loop, which is when systems are evaluated.
+
+It also makes hooking up the rest of your code to the `GameData` instance relatively easy.
+
 ## What happens when you run `cargo run`
 
 TODO: Run through how all the above is initialised, starting at a top-to-bottom of `main.rs` and `strain.rs`

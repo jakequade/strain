@@ -58,6 +58,9 @@ Prefab(
                   (x: 290, y: 97, width: 33, height: 33),
                   (x: 323, y: 97, width: 33, height: 33),
                   (x: 356, y: 97, width: 33, height: 33),
+
+                  // Jumping
+                  (x: 250, y: 0, width: 32, height: 32)
                 ],
               )),
             ],
@@ -147,11 +150,32 @@ Prefab(
                         22,
                       ],
                       function: Step,
-                    )
-                  )
-                ] 
-              )
-            )
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            (
+              DudeJumping,
+              (
+                samplers: [
+                  (
+                    0,
+                    SpriteIndex,
+                    (
+                      input: [
+                        0.0,
+                        1.0,
+                      ],
+                      output: [
+                        23
+                      ],
+                      function: Step,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

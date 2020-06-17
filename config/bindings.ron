@@ -1,6 +1,6 @@
 (
     actions: {
-        "jump": [ [Key(W)] ],
+        "jump": [ [Key(Space)] ],
     },
     axes: {
         "dude_horizontal": Emulated(pos: Key(E), neg: Key(A)),

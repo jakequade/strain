@@ -2,6 +2,7 @@ use amethyst::ecs::{prelude::Component, storage::DenseVecStorage};
 
 pub enum DudeState {
   Idle,
+  Jumping,
   Walking,
 }
 
