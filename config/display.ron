@@ -1,4 +1,4 @@
 (
   title: "Strain",
-  dimensions: Some((1000, 700)),
+  dimensions: Some((750, 500)),
 )

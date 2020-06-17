@@ -35,7 +35,7 @@ impl<'s> System<'s> for AnimationControlSystem {
           // This ensures persistence after `abort()` calls
           if !control_set.has_animation(animation_id) {
             let end = match animation_id {
-              AnimationId::DudeIdle => EndControl::Loop(None),
+              _ => EndControl::Loop(None)
             };
 
             control_set.add_animation(
@@ -75,7 +75,7 @@ impl<'s> System<'s> for DudeAnimationSystem {
       (&entities, &dudes, &mut animations, &mut control_sets).join()
     {
       let new_animation_id = match dude.state {
-        DudeState::Idle => AnimationId::DudeIdle,
+        DudeState::Walking => AnimationId::DudeWalking,
         _ => AnimationId::DudeIdle,
       };
 

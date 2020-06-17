@@ -3,7 +3,6 @@ mod components;
 mod entities;
 mod resources;
 mod states;
-mod strain;
 mod systems;
 
 use amethyst::{

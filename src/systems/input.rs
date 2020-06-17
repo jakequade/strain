@@ -20,20 +20,23 @@ impl<'s> System<'s> for DudeInputSystem {
     fn run(&mut self, (mut directions, mut dudes, input): Self::SystemData) {
         let run_input = input
             .axis_value("dude_horizontal")
-            .expect("Could not find dude_x value");
+            .expect("Could not find dude_horizontal axis value");
 
-        if run_input == 0.0 {
-            return;
-        }
+        
 
         for (direction, dude) in (&mut directions, &mut dudes).join() {
-            dude.state = DudeState::Walking;
+            if run_input == 0.0 {
+                dude.state = DudeState::Idle;
+                return;
+            }
 
             if run_input < 0.0 {
                 direction.x = Some(Directions::Left);
+                dude.state = DudeState::Walking;
             }
             if run_input > 0.0 {
                 direction.x = Some(Directions::Right);
+                dude.state = DudeState::Walking;
             }
         }
     }

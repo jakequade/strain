@@ -17,9 +17,6 @@ impl<'s> System<'s> for MotionSystem {
 
     fn run(&mut self, (directions, dudes, mut motions): Self::SystemData) {
         for (direction, dude, motion) in (&directions, &dudes, &mut motions).join() {
-
-            println!("got here");
-
             let acceleration = match dude.state {
                 DudeState::Idle => {
                     let acceleration_x = if motion.velocity.x != 0. { -0.6 } else { 0. };
