@@ -1,38 +1,36 @@
 use amethyst::{
-  core::math::Vector2,
-  ecs::{Join, ReadStorage, System, WriteStorage},
+    core::math::Vector2,
+    ecs::{Join, ReadStorage, System, WriteStorage}
 };
 
-use crate::components::{
-  direction::Direction,
-  dude::{Dude, DudeState},
-  motion::Motion,
-};
+use crate::components::{direction::Direction, dude::{Dude, DudeState}, motion::Motion};
 
-pub struct DudeMotionSystem;
+/// Actions the changes in input and state that relate to movement.
+pub struct MotionSystem;
 
-impl<'s> System<'s> for DudeMotionSystem {
-  type SystemData = (
-    ReadStorage<'s, Direction>,
-    ReadStorage<'s, Dude>,
-    WriteStorage<'s, Motion>,
-  );
+impl<'s> System<'s> for MotionSystem {
+    type SystemData = (
+        ReadStorage<'s, Direction>,
+        ReadStorage<'s, Dude>,
+        WriteStorage<'s, Motion>,
+    );
 
-  fn run(&mut self, (directions, dudes, mut motions): Self::SystemData) {
-    for (direction, dude, motion) in (&directions, &dudes, &mut motions).join() {
-      let mut acceleration = Vector2::new(0., 0.);
+    fn run(&mut self, (directions, dudes, mut motions): Self::SystemData) {
+        for (direction, dude, motion) in (&directions, &dudes, &mut motions).join() {
 
-      match dude.state {
-        DudeState::Idle => {
-          let acceleration_x = if motion.velocity.x != 0.0 { -0.6 } else { 0.0 };
-          acceleration = Vector2::new(acceleration_x, -0.6)
+            println!("got here");
+
+            let acceleration = match dude.state {
+                DudeState::Idle => {
+                    let acceleration_x = if motion.velocity.x != 0. { -0.6 } else { 0. };
+                    Vector2::new(acceleration_x, -0.6)
+                },
+                DudeState::Walking => {
+                    Vector2::new(0.6, -0.6)
+                }
+            };
+
+            motion.update_velocity(acceleration, direction, 0., dude.max_ground_speed);
         }
-        DudeState::Walking => {
-          acceleration = Vector2::new(0.6, -0.6);
-        } // TODO: Add jumping and dead states.
-      }
-
-      // motion.update_velocity(acceleration, 0., dude.max_ground_speed);
     }
-  }
 }

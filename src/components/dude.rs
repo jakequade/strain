@@ -6,12 +6,14 @@ pub enum DudeState {
 }
 
 pub struct Dude {
+  pub max_ground_speed: f32,
   pub state: DudeState,
 }
 
 impl Dude {
   pub fn new() -> Dude {
     Dude {
+      max_ground_speed: 6.,
       state: DudeState::Idle,
     }
   }

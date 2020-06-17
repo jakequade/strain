@@ -26,6 +26,7 @@ use crate::{
     systems::{
         animation::{AnimationControlSystem, DudeAnimationSystem},
         input::DudeInputSystem,
+        motion::MotionSystem,
         physics::PhysicsSystem,
         transformation::{CameraTransformationSystem, TransformationSystem},
     },
@@ -78,12 +79,13 @@ fn main() -> amethyst::Result<()> {
             "dude_animation_system",
             &["transformation_system"],
         )
+        .with(DudeInputSystem, "dude_input_system", &[])
+        .with(MotionSystem, "dude_motion_system", &["dude_input_system"])
         .with(
             AnimationControlSystem,
             "animation_control_system",
             &["dude_animation_system"],
-        )
-        .with(DudeInputSystem, "dude_input_system", &[]);
+        );
 
     let mut game = Application::new(assets_dir, LoadState::default(), game_data)?;
     game.run();

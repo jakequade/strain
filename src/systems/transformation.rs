@@ -26,10 +26,9 @@ impl<'s> System<'s> for CameraTransformationSystem {
     ReadStorage<'s, Dude>,
     ReadStorage<'s, Subject>,
     WriteStorage<'s, Transform>,
-    ReadExpect<'s, Context>,
   );
 
-  fn run(&mut self, (dudes, subjects, mut transforms, contexts): Self::SystemData) {
+  fn run(&mut self, (dudes, subjects, mut transforms): Self::SystemData) {
     let mut dude_x = 0.;
 
     let map_width = 700.;
@@ -37,12 +36,12 @@ impl<'s> System<'s> for CameraTransformationSystem {
 
     for (_dude, transform) in (&dudes, &mut transforms).join() {
       dude_x = transform.translation().x;
+    }
 
-      // for (_subject, transform) in (&subjects, &mut transforms).join() {
-      //   if (dude_x >= background_width && dude_x <= map_width - background_width) {
-      //     transform.set_translation_x(dude_x);
-      //   }
-      // }
+    for (_subject, transform) in (&subjects, &mut transforms).join() {
+      if dude_x >= background_width && dude_x <= map_width - background_width {
+        transform.set_translation_x(dude_x);
+      }
     }
   }
 }

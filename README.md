@@ -62,3 +62,5 @@ Systems collectively determine both what is happening in the game right now, and
 ## What happens when you run `cargo run`
 
 TODO: Run through how all the above is initialised, starting at a top-to-bottom of `main.rs` and `strain.rs`
+
+## How the Systems connect to each other
