@@ -24,6 +24,7 @@ use crate::{
     states::LoadState,
     systems::{
         animation::{AnimationControlSystem, DudeAnimationSystem},
+        direction::DirectionSystem,
         input::DudeInputSystem,
         motion::MotionSystem,
         physics::PhysicsSystem,
@@ -73,6 +74,7 @@ fn main() -> amethyst::Result<()> {
             "camera_transformation_system",
             &["transformation_system"],
         )
+        .with(DirectionSystem, "direction_system", &[])
         .with(
             DudeAnimationSystem,
             "dude_animation_system",

@@ -1,6 +1,6 @@
 use amethyst::{
     assets::{Handle, Prefab},
-    core::{Transform, WithNamed},
+    core::{Transform, WithNamed, math::Vector3},
     ecs::prelude::{Builder, World, WorldExt},
     renderer::transparent::Transparent,
 };
@@ -12,10 +12,13 @@ use crate::components::{
     motion::Motion,
 };
 
+const SCALE_MAGNITUDE: f32 = 5.;
+
 pub fn load_dude(world: &mut World, prefab: Handle<Prefab<AnimationPrefabData>>) {
     let mut transform = Transform::default();
     let motion = Motion::new();
 
+    transform.set_scale(Vector3::new(SCALE_MAGNITUDE, SCALE_MAGNITUDE, SCALE_MAGNITUDE));
     transform.set_translation_x(384.);
     transform.set_translation_y(176.);
 
