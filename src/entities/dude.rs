@@ -12,7 +12,7 @@ use crate::components::{
     motion::Motion,
 };
 
-const SCALE_MAGNITUDE: f32 = 5.;
+const SCALE_MAGNITUDE: f32 = 2.;
 
 pub fn load_dude(world: &mut World, prefab: Handle<Prefab<AnimationPrefabData>>) {
     let mut transform = Transform::default();

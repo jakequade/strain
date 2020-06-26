@@ -1,5 +1,5 @@
 use amethyst::{
-    assets::{Handle, Loader, PrefabLoaderSystemDesc, ProgressCounter},
+    assets::{Handle, JsonFormat, Loader, PrefabLoaderSystemDesc, ProgressCounter},
     prelude::{GameData, SimpleState, SimpleTrans, StateData, Trans, WorldExt},
 };
 
@@ -7,6 +7,7 @@ use crate::resources::{load_assets, PrefabList};
 
 #[derive(Default)]
 pub struct LoadState {
+    map_handle: Option<Handle<Map>>,
     progress_counter: Option<ProgressCounter>,
 }
 
@@ -20,6 +21,18 @@ impl SimpleState for LoadState {
         let world = data.world;
 
         world.insert(Context::new());
+
+        // Load map
+        let loader = world.read_resource::<Loader>();
+
+        self.map_handle = {
+            Some(loader.load(
+                "textures/level-one-demo.json",
+                JsonFormat,
+                self.progress_counter.as_mut().expect("couldn't load progress counter for map json"),
+                &world.read_resource::<AssetStorage<Map>>()
+            ))
+        };
 
         self.progress_counter = Some(load_assets(world, vec![AssetType::Dude]));
 

@@ -7,7 +7,7 @@ Prefab(
         // SpriteSheetPrefab
         sprite_scene: (
           sheet: Sheet(
-            texture: File("texture/spritesheet.png", (
+            texture: File("textures/dude.png", (
               "IMAGE", (
                 sampler_info: (
                   min_filter: Nearest,
@@ -42,8 +42,8 @@ Prefab(
                   (x: 193, y: 65, width: 32, height: 32),
                   (x: 225, y: 65, width: 32, height: 32),
                   (x: 257, y: 65, width: 32, height: 32),
-                  (x: 289, y: 65, width: 32, height: 32),
-                  (x: 322, y: 65, width: 32, height: 32),
+                  (x: 290, y: 65, width: 32, height: 32),
+                  (x: 327, y: 65, width: 32, height: 32),
 
                   // Walking
                   (x: 2, y: 97, width: 33, height: 33),

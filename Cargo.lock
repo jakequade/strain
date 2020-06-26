@@ -144,6 +144,7 @@ dependencies = [
  "rayon",
  "ron",
  "serde",
+ "serde_json",
 ]
 
 [[package]]

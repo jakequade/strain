@@ -1,4 +1,3 @@
-mod asset_loader;
 mod components;
 mod entities;
 mod resources;

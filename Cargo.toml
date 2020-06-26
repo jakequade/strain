@@ -5,7 +5,7 @@ authors = []
 edition = "2018"
 
 [dependencies]
-amethyst = "0.15.0"
+amethyst = { version = "0.15.0", features = ["json"] }
 serde = "1.0.111"
 
 [features]
